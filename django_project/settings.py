@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     # 3rd-party apps
     "rest_framework", # new
     "corsheaders", # new
+    "rest_framework.authtoken", # new
+    "dj_rest_auth", # new
     # Local
     "accounts.apps.AccountsConfig", 
     "posts.apps.PostsConfig",
@@ -121,10 +123,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "accounts.CustomUser" # new
 
 
-REST_FRAMEWORK = { # new
-"DEFAULT_PERMISSION_CLASSES": [
-"rest_framework.permissions.IsAuthenticated", # new
-],
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",  # new
+    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [  # new
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",  # new
+    ],
 }
 
 # new
